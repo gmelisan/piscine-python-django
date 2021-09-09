@@ -1,0 +1,75 @@
+{% load static %}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html>
+  <head>
+	{% bootstrap_css %}
+	{% bootstrap_javascript jquery=True %}
+    <meta charset="utf-8">
+    <title>d09</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+      $(document).ready(function () {
+		  $('#loginform').submit(function () {
+				//console.log('send data: ' + $(this).serialize())
+                // create an AJAX call
+                $.ajax({
+                    data: $(this).serialize(), // get the form data
+                    type: $(this).attr('method'), // GET or POST
+                    // on success
+                    success: function(response) {
+						
+						$("#loginform").hide();
+						$(".errors").remove();
+						$("#maincontainer").append("<p>Logged as " + response.username + '</p>');
+						$("#maincontainer").append('<form action="{% url 'logout' %}" id="logoutform" method="post"> {% csrf_token %}<input type="submit" value="Logout"> </form>');
+						
+                    },
+                    // on error
+                    error: function(response, textStatus) {
+						//console.log('status: ' + textStatus)
+                        // alert the error if any error occured
+                        // alert(response.responseJSON.errors);
+                        // console.log(response.responseJSON.errors);
+						$('#maincontainer').append('<p class="errors">' + response.responseJSON.errors + '</p>');
+                    }
+                });
+                return false;
+          });
+
+		  $('#logoutform').submit(function() {
+		   	  $.ajax({
+		   		  data: $(this).serialize(),
+		   		  type: $(this).attr('method'),
+				  url: "{% url 'logout' %}",
+		   		  success: function(response) {
+		   			  $("#logoutform").remove();
+		   			  $("#loginform").show();
+		   		  },
+		   		  error: function(response) {
+		   			  console.log(response.responseJSON.errors);
+		   		  }
+		   	  });
+
+		  });
+	  });
+    </script>
+  </head>
+  <body>
+	<div class="container" id="maincontainer">
+	  <h1>Day zero nine</h1>
+	  <form method="post" id="loginform">
+		{% csrf_token %}
+		<div class="form-group">
+		  <label>Username</label>
+		  <input type="text" class="form-control" name="username">
+		</div>
+		<div class="form-group">
+		  <label>Password</label>
+		  <input type="password" class="form-control" name="password">
+		</div>
+		<button type="submit" class="btn btn-primary">Login</button>
+	  </form>
+	</div>
+  </body>
+</html>

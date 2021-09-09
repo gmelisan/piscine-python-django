@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8"/>
+	<title>{name} - CV</title>
+	<style>
+	  body {
+		  width: 800px;
+		  margin: 0 auto;
+	  }
+	  table {
+		  width: 800px;
+		  border-collapse: collapse;
+	  }
+	  td {
+		  padding: 20px;
+		  text-align: left;
+	  }
+	  td.topleft {
+		  text-align: left;
+		  border-bottom: 2px solid #aaaaaa
+	  }
+	  td.topright {
+		  text-align: right;
+		  border-bottom: 2px solid #aaaaaa
+	  }
+	  td.leftcol {
+		  text-align: center;
+	  }
+	  td.rightcol {
+		  text-align: left;
+	  }
+	  p {
+		  font-size: 18px;
+	  }
+	</style>
+  </head>
+  <body>
+	<table>
+	  <tr>
+		<td class="topleft">
+		  <h1>{name} {surname}</h1>
+		  <p> Age: {age} </p>
+		</td>
+		<td class="topright">
+		  <p> {email} </p>
+		  <p> {phone} </p>
+		</td>
+	  </tr>
+	  <tr>
+		<td class="leftcol">
+		  <p>Experience:</p>
+		</td>
+		<td class="rightcol">
+		  {experience}
+		</td>
+	  </tr>
+	  <tr>
+		<td class="leftcol">
+		  <p>Achievements:</p>
+		</td>
+		<td class="rightcol">
+		  {achievements}
+		</td>
+	  </tr>
+	  <tr>
+		<td class="leftcol">
+		  <p>Skills:</p>
+		</td>
+		<td class="rightcol">
+		  {skills}
+		</td>
+	  </tr>
+	</table>
+  </body>
+</html>

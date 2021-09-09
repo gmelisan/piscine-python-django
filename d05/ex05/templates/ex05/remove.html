@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>remove</title>
+  </head>
+  <body>
+	<form method="post" action="{{ request.path }}">
+	  {% csrf_token %}
+	  <select name="remove">
+		{% for title in titles %}
+		<option value="{{ title }}">{{ title }}</option>
+		{% endfor %}
+	  </select>
+	  <input type="submit" value="remove">
+	</form>
+  </body>
+</html>
+

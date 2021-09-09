@@ -1,0 +1,19 @@
+{% extends "ex01/base.html" %}
+{% load static %}
+
+{% block title %} Ex01: Display process of a static page. {% endblock %}
+
+{% block content %}
+<p>
+  The following diagram describes the main data flow, and the components required when handling HTTP requests and responses. As we already implemented the model, the main components we'll create are:
+</p>
+
+<img src="{% static 'diagram.png' %}">
+  <ul>
+    <li> URL mappers to forward the supported URLs (and any information encoded in the URLs) to the appropriate view functions. </li>
+    <li>View functions to get the requested data from the models, create HTML pages that display the data, and return the pages to the user to view in the browser.</li>
+    <li>Templates to use when rendering data in the views.</li>
+  </ul>
+
+
+{% endblock %}

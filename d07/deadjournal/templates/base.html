@@ -1,0 +1,19 @@
+{% load static %}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	{% bootstrap_css %}
+	{% bootstrap_javascript jquery=True %}
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+	<title> {% block title %} DeadJournal {% endblock %} </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+	<div class="container-fluid">
+	{% include 'header.html' %}
+	{% block content %}
+	{% endblock %}
+	</div>
+  </body>
+</html>

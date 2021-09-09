@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if not request.user.is_authenticated %}
+<p> Login to view your publicashions </p>
+{% else %}
+
+<h2>My publicashions</h2>
+
+{% if not object_list %}
+
+<p> No articles yet </p>
+
+{% else %}
+
+<table class="table">
+  <thead>
+  <tr>
+	<th>Title</th>
+	<th>Synopsis</th>
+	<th>Created</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for article in object_list %}
+  <tr>
+	<td><a href="{% url 'article' article.id %}">{{article.title}}</a></td>
+	<td class="col-md-7">{{article.synopsis}}</td>
+	<td>{{article.created|date:'d.m.Y H:i'}}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h3> <a type="button" class="btn btn-primary" href="{% url 'publish' %}">Publish</a> </h3>
+
+{% endif %}
+
+{% endif%}
+{% endblock %}

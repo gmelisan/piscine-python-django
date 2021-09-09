@@ -1,0 +1,71 @@
+{% extends 'ex/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<h1> Life pro tips </h1>
+<hr>
+
+{% if request.user.is_authenticated %}
+
+
+<h4> Share a pro tip with everyone! </h4>
+<form action="{{ request.path }}" method="post">
+  {% csrf_token %}
+  {% bootstrap_form form show_label=False %}
+  {% buttons %}
+  <button type="submit" class="btn btn-primary">
+    Publicate
+  </button>
+  {% endbuttons %}
+</form>
+
+{% endif %}
+
+{% if not tips %}
+
+<p> No tips yet. <br>
+  
+  {% if not request.user.is_authenticated %}
+  <a href="{% url 'login' %}">Login</a> to share a one!
+  {% endif %}
+</p>
+
+{% endif %}
+
+{% for tip in tips %}
+
+<div class="row">
+  <div class="col-xs-2 text-center">
+	<div class="row">
+	  <a href="{% url 'tip' tip.id %}?action=upvote" class="btn btn-default btn-xs">
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+	  </a>
+	  <p>{{ tip.upvotes.count }}</p>
+	</div>
+	<div class="row"></div>
+	<div class="row">
+	  <a href="{% url 'tip' tip.id %}?action=downvote" class="btn btn-default btn-xs">
+		<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+	  </a>
+	  <p>{{ tip.downvotes.count }}</p>
+	</div>
+  </div>
+  <div class="col-xs-7 container-fluid">
+	<blockquote>
+	  <p>{{ tip.content }}</p>
+	  <footer>
+		{{ tip.author }}, {{ tip.date|date:'d.m.Y H:i'}}
+		{# if tip.author == request.user #}
+		{% if request.user.is_authenticated %}
+		<a class="text-danger" href="{% url 'tip' tip.id %}?action=delete">Delete</a>
+		{% endif %}
+	  </footer>
+	</blockquote>
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
+

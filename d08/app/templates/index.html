@@ -1,0 +1,46 @@
+{% load static %}
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+	{% bootstrap_css %}
+	{% bootstrap_javascript jquery=True %}
+    <meta charset="utf-8">
+    <title>d08</title>
+	<style>
+	  body {
+		  background-image: url("{% static 'bg.jpg' %}");
+	  }
+	  #maincontainer {
+		  background: white;
+	  }
+	  .thumbnail {
+		  width: 300px;
+	  }
+	</style>
+  </head>
+  <body>
+	<div class="container" id="maincontainer">
+	  <h1>Day zero eight</h1>
+	  <form action="{{ request.path }}" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{% bootstrap_form form %}
+		{% buttons %}
+		{% bootstrap_button "Upload" button_type="submit" button_class="btn-primary" %}
+		{% endbuttons %}
+	  </form>
+
+	  {% for pic in pictures %}
+	  <div class="thumbnail">
+		<img src="{{ pic.image.url }}">
+		<div class="caption">
+		  <p>{{ pic.title }}</p>
+		</div>
+	  </div>
+	  {% empty %}
+	  <p> No pics </p>
+	  {% endfor %}
+	</div>
+  </body>
+</html>

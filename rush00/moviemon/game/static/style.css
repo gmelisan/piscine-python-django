@@ -1,0 +1,13 @@
+table {
+	border: 1px solid black;
+}
+
+td {
+	width: 20px;
+	height: 20px;
+}
+
+table#control {
+	text-align: center;
+	border-width: 0;
+}

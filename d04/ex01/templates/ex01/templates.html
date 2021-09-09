@@ -1,0 +1,38 @@
+{% extends "ex01/base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'style2.css' %}">
+{% endblock %}
+{% block title %} Ex01: Template engine. {% endblock %}
+
+{% block content %}
+
+<ul>
+<li>
+  <code>block</code>
+  <p>
+	Defines a block that can be overridden by child templates.
+  </p>
+</li>
+<li>
+  <code>for ... in</code>
+  <p>
+	You can loop over a list in reverse by using { % for obj in list reversed % }. If you need to loop over a list of lists, you can unpack the values in each sublist into individual variables.
+  </p>
+</li>
+<li>
+  <code>if</code>
+  <p>
+	The { % if % } tag evaluates a variable, and if that variable is “true” (i.e. exists, is not empty, and is not a false boolean value) the contents of the block are output.
+  </p>
+</li>
+<li>
+  <p>The display of the passing context variables.</p>
+  <p>
+	A variable outputs a value from the context, which is a dict-like object mapping keys to values. Variables are surrounded by { { and } }.
+  </p>
+  
+</li>
+</ul>
+{% endblock %}

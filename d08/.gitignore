@@ -1,0 +1,7 @@
+__pycache__/
+migrations/
+db*
+media/
+build/
+d08.egg-info/
+dist/

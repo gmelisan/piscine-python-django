@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Worldmap</title>
+{% endblock title %}
+
+{% block content %}
+<p>
+  Movieballs: {{ movieballs }}
+  {% if message == '' %}
+  <br>
+  {% else %}
+  {{ message }}
+  {% endif %}
+</p>
+<table>
+  {% for row in map %}
+  <tr>
+	{% for cell in row %}
+	{% if cell.player == True %}
+	<td class="player"> X
+	{% elif cell.data == '' %}
+	<td class="empty"> .
+	{% elif cell.data == 'movieball' %}
+	<td class="movieball"> @
+	{% elif cell.data == 'moviemon' %}
+	<td class="moviemon"> #
+	</td>
+	{% endif %}
+	{% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+
+<p>
+{{ help }}
+</p>
+
+{% endblock content %}

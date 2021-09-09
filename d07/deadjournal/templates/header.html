@@ -1,0 +1,63 @@
+<div class="text-right">
+  <br>
+  <a href="#">Switch to Russian</a>
+</div>
+
+<h1> DeadJournal <small>Because LiveJournal is dead</small></h1>
+<hr>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+	<!-- Brand/logo -->
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="{% url 'home' %}">
+		<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+	  </a>
+	</div>
+	
+	<!-- Collapsible Navbar -->
+	<div class="collapse navbar-collapse" id="navbar">
+	  <ul class="nav navbar-nav">
+		<li><a href="{% url 'articles' %}">Articles</a></li>
+		{% if not request.user.is_authenticated %}
+		<li><a href="{% url 'register' %}">Register</a></li>
+		{% else %}
+		<li><a href="{% url 'favourites' %}">Favourites</a></li>
+		<li><a href="{% url 'publicashions' %}">Publicashions</a></li>
+		{% endif %}
+	  </ul>
+	  
+	  {% if not request.user.is_authenticated %}
+	  <form class="navbar-form navbar-right" action="{% url 'login' %}" method="post">
+		{% csrf_token %}
+		<div class="form-group">
+		  <input type="text" class="form-control" name="username" placeholder="username">
+		  <input type="password" class="form-control" name="password" placeholder="password">
+		</div>
+		<button type="submit" class="btn btn-default">Login</button>
+	  </form>
+	  {% else %}
+	  
+	  
+	  <ul class="nav navbar-nav navbar-right">
+		<li><a href="{% url 'logout' %}">Logout</a></li>
+	  </ul>
+	  <p class="navbar-text navbar-right">Logged as {{ request.user }}</p>
+	  
+	  {% endif %}
+	  
+
+	</div>
+  </div>
+</nav>
+
+
+
+
+

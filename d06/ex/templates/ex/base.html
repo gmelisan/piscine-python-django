@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+{% load bootstrap3 %}
+<html lang="en">
+  <head>
+	{# Load CSS and JavaScript #}
+	{% bootstrap_css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+	{% bootstrap_javascript jquery=True %}
+  </head>
+  <body>
+
+	{% include 'ex/header.html' %}
+
+	<div class="container">
+	  {% bootstrap_messages %}
+	  
+	  {% block content %}
+	  {% endblock %}
+	</div>
+
+	{% block footer %}
+	{% endblock %}
+
+  </body>
+</html>

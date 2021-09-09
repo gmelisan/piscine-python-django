@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if not object_list %}
+
+<p> No articles yet </p>
+
+{% else %}
+
+<table class="table">
+  <thead>
+  <tr>
+	<th>Title</th>
+	<th>Synopsis</th>
+	<th>Writer</th>
+	<th>Created</th>
+	<th>When</th>
+	<th></th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for article in object_list %}
+  <tr>
+	<td>{{article.title}}</td>
+	<td class="col-md-7">{{ article.synopsis|truncatechars:120 }}</td>
+	<td>{{article.author}}</td>
+	<td>{{ article.created }}</td>
+	<td>{{ article.created|timesince }} ago</td>
+	<td><a href="{% url 'article' article.id %}" type="button" class="btn btn-info">Read</a></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+{% if not request.user.is_authenticated %}
+<p> Login to view your favourites </p>
+{% else %}
+
+<h2>My favourites</h2>
+
+{% if not object_list %}
+
+<p> No articles yet </p>
+
+{% else %}
+
+<ul>
+  {% for fav in object_list %}
+  <li> <a href="{% url 'article' fav.article.id %}"> {{ fav }} </a> </li>
+  {% endfor %}
+</ul>
+
+{% endif %}
+
+{% endif%}
+</div>
+{% endblock %}
